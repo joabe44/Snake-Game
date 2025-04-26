@@ -196,17 +196,78 @@ const gameLoop = () => {
 
 gameLoop()
 
+let touchStartX = null;
+let touchStartY = null;
+
+canvas.addEventListener('touchstart', handleTouchStart);
+canvas.addEventListener('touchmove', handleTouchMove);
+canvas.addEventListener('touchend', handleTouchEnd);
+
+function handleTouchStart(event) {
+    event.preventDefault();
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+}
+
+function handleTouchMove(event) {
+    if (!touchStartX || !touchStartY) return;
+    event.preventDefault();
+    const touch = event.touches[0];
+    const touchEndX = touch.clientX;
+    const touchEndY = touch.clientY;
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    const sensitivity = 20;
+
+    if (Math.abs(deltaX) > sensitivity || Math.abs(deltaY) > sensitivity) {
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (deltaX > 0 && direction !== "left") direction = "right";
+            else if (deltaX < 0 && direction !== "right") direction = "left";
+        } else {
+            if (deltaY > 0 && direction !== "up") direction = "down";
+            else if (deltaY < 0 && direction !== "down") direction = "up";
+        }
+        touchStartX = null;
+        touchStartY = null;
+    }
+}
+
+function handleTouchEnd(event) {
+    touchStartX = null;
+    touchStartY = null;
+}
+
 document.addEventListener("keydown", ({ key }) => {
-    if (key === "ArrowRight" && direction !== "left") direction = "right"
-    if (key === "ArrowLeft" && direction !== "right") direction = "left"
-    if (key === "ArrowDown" && direction !== "up") direction = "down"
-    if (key === "ArrowUp" && direction !== "down") direction = "up"
-})
+    if (key === "ArrowRight" && direction !== "left") direction = "right";
+    if (key === "ArrowLeft" && direction !== "right") direction = "left";
+    if (key === "ArrowDown" && direction !== "up") direction = "down";
+    if (key === "ArrowUp" && direction !== "down") direction = "up";
+});
+
+function move(dir) {
+    if (dir === "up" && direction !== "down") direction = "up";
+    if (dir === "down" && direction !== "up") direction = "down";
+    if (dir === "left" && direction !== "right") direction = "left";
+    if (dir === "right" && direction !== "left") direction = "right";
+}
 
 buttonPlay.addEventListener("click", () => {
-    score.innerText = "00"
-    menu.style.display = "none"
-    canvas.style.filter = "none"
-    snake = [initialPosition]
-    direction = undefined
-})
+    score.innerText = "00";
+    menu.style.display = "none";
+    canvas.style.filter = "none";
+    snake = [initialPosition];
+    direction = undefined;
+    gameLoop();
+});
+
+function checkMobile() {
+    if (window.innerWidth <= 768) {
+        if (mobileControls) mobileControls.style.display = "flex";
+    } else {
+        if (mobileControls) mobileControls.style.display = "none";
+    }
+}
+
+checkMobile();
+window.addEventListener('resize', checkMobile);
