@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppings", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at center, #1e1e1e, #000000);
+  animation: pulseBackground 5s infinite alternate;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes pulseBackground {
+  0% {
+    background-color: #0d0d0d;
+  }
+  100% {
+    background-color: #1a1a1a;
+  }
+}
+
+canvas {
+    background-color: #111;
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.8rem;
+}
+
+.score--value {
+    font-weight: 700;
+    font-size: 4.5rem;
+    display: block;
+    margin-top: -10px;
+}
+
+.menu-screen {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.game-over {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.final-score {
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.btn-play {
+    border: none;
+    border-radius: 100px;
+    padding: 10px 15px 10px 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f0808;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+} 
+
+/* Responsividade para celular */
+
+@media screen and (max-width: 768px) {
+    body {
+      padding: 20px;
+    }
+  
+    .score {
+      font-size: 1.2rem;
+    }
+  
+    .score--value {
+      font-size: 3rem;
+    }
+  
+    .game-over {
+      font-size: 2rem;
+      text-align: center;
+    }
+  
+    .final-score {
+      font-size: 1.2rem;
+    }
+  
+    .btn-play {
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      margin-top: 30px;
+    }
+  
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+      max-width: 100%;
+    }
+  
+    .menu-screen {
+      width: 100%;
+      padding: 10px;
+    }
+  }  
+
+ 
