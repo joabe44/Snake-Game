@@ -8,19 +8,17 @@
 }
 
 body {
-  background: radial-gradient(circle at center, #1e1e1e, #000000);
-  animation: pulseBackground 5s infinite alternate;
-  background-size: cover;
-  margin: 0;
-  padding: 0;
+  background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
+  background-size: 400% 100%;
+  animation: moveBackground 15s linear infinite;
 }
 
-@keyframes pulseBackground {
+@keyframes moveBackground {
   0% {
-    background-color: #0d0d0d;
+    background-position: 0% 0%;
   }
   100% {
-    background-color: #1a1a1a;
+    background-position: 100% 0%;
   }
 }
 
